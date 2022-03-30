@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_previous_attempt.xml" value="0.20845997973657548" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_quiz.xml" value="0.4329710144927536" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_start_quiz.xml" value="0.4328125" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/nav_header.xml" value="0.4329710144927536" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/menu/drawer_menu.xml" value="0.33" />
       </map>

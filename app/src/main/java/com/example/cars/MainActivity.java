@@ -33,32 +33,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new QuizFragment()).commit();
-        navigationView.setCheckedItem(R.id.nav_message);
+                new HomeFragment()).commit();
+        navigationView.setCheckedItem(R.id.nav_home);
     }
+
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_message:
+            case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new QuizFragment()).commit();
+                        new HomeFragment()).commit();
                 break;
-            case R.id.nav_chat:
+            case R.id.nav_start_quiz:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new QuizFragment()).commit();
+                        new StartQuizFragment()).commit();
                 break;
-            case R.id.nav_profile:
+            case R.id.nav_previous_attempt:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new QuizFragment()).commit();
+                        new PreviousAttemptFragment()).commit();
                 break;
             case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_send:
-                Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show();
-                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);
