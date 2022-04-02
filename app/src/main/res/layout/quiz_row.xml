@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/txt_question_number"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@color/QuestionHeader"
+                android:padding="5dp"
+                android:text="Question-1"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_question"
+                android:layout_width="365dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:justificationMode="inter_word"
+                android:text="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_question_number" />
+
+            <ImageView
+                android:id="@+id/imageView_question_image"
+                android:layout_width="282dp"
+                android:layout_height="257dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_question"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <RadioGroup
+                android:id="@+id/radio_button_group"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_question_image"
+
+                >
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_block_A"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/radio_option_A"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A."
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_option_A"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/radio_option_A"
+                        app:layout_constraintTop_toTopOf="@+id/radio_option_A" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_block_B"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/radio_option_B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B."
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_option_B"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/radio_option_B"
+                        app:layout_constraintTop_toTopOf="@+id/radio_option_B" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_block_C"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/radio_option_C"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C."
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_option_C"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/radio_option_C"
+                        app:layout_constraintTop_toTopOf="@+id/radio_option_C" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_block_D"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/radio_option_D"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="D."
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_option_D"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/radio_option_D"
+                        app:layout_constraintTop_toTopOf="@+id/radio_option_D" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/checkBox_group"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radio_button_group">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/checkbox_block_A"
+                    >
+
+                    <CheckBox
+                        android:id="@+id/checkBox_A"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A."
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/checkBox_A_Text"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/checkBox_A"
+                        app:layout_constraintTop_toTopOf="@+id/checkBox_A" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/checkbox_block_B"
+                    >
+
+                    <CheckBox
+                        android:id="@+id/checkBox_B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B."
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/checkBox_B_Text"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/checkBox_B"
+                        app:layout_constraintTop_toTopOf="@+id/checkBox_B" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/checkbox_block_C"
+                    >
+
+                    <CheckBox
+                        android:id="@+id/checkBox_C"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C."
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/checkBox_C_Text"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/checkBox_C"
+                        app:layout_constraintTop_toTopOf="@+id/checkBox_C" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/checkbox_block_D"
+                    >
+
+                    <CheckBox
+                        android:id="@+id/checkBox_D"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="D."
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/checkBox_D_Text"
+                        android:layout_width="325dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4sp"
+                        android:paddingTop="13dp"
+                        android:text=" Lorem Ipsum, mas a maioria sofreu algum tipo"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/checkBox_D"
+                        app:layout_constraintTop_toTopOf="@+id/checkBox_D" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/quiz_answer_box"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:background="#FFD124"
+                android:padding="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox_group">
+
+                <ImageView
+                    android:id="@+id/imageview_answer_icon"
+                    android:layout_width="47dp"
+                    android:layout_height="43dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_wrong_answer" />
+
+                <TextView
+                    android:id="@+id/txt_answer"
+                    android:layout_width="275dp"
+                    android:layout_height="21dp"
+                    android:gravity="end"
+                    android:paddingRight="15dp"
+                    android:text="Correct Answer: A,B,C"
+                    android:textColor="@color/green"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.936"
+                    app:layout_constraintStart_toEndOf="@+id/imageview_answer_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

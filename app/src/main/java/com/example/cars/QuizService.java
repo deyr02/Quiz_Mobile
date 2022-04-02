@@ -1,6 +1,7 @@
 package com.example.cars;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -13,19 +14,16 @@ import org.json.JSONArray;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
-public class AttemptService {
-
+public class QuizService {
     private Context context;
-    private long userId;
-    public AttemptService(Context context, Long userId) {
+
+    public QuizService(Context context){
         this.context = context;
-        this.userId = userId;
     }
 
-    public void  GetAttmpts(APIResponseListener apiResponseListener){
-        String URL = API.ATTEMPT+"readbyuser.php?userid=" +userId;
+    public void  read(APIResponseListener apiResponseListener){
+        String URL = API.QUIZ+"read.php";
         JsonArrayRequest
                 jsonArrayRequest
                 = new JsonArrayRequest(
@@ -37,9 +35,9 @@ public class AttemptService {
                     @Override
                     public void onResponse(JSONArray response) {
                         Gson gson = new Gson();
-                        Type type = new TypeToken<ArrayList<Attempt>>(){}.getType();
-                        ArrayList<Attempt> attempts = gson.fromJson(response.toString(),type);
-                        apiResponseListener.onResponse(attempts);
+                        Type type = new TypeToken<ArrayList<Quiz>>(){}.getType();
+                        ArrayList<Quiz> quizzes = gson.fromJson(response.toString(),type);
+                        apiResponseListener.onResponse(quizzes);
                     }
                 },
                 new Response.ErrorListener() {

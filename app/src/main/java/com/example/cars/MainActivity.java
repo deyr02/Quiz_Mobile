@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
-        navigationView.setCheckedItem(R.id.nav_home);
+                new AllQuestionFragment()).commit();
+        navigationView.setCheckedItem(R.id.nav_all_questions);
     }
 
 
@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_previous_attempt:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new PreviousAttemptFragment()).commit();
+                break;
+
+            case R.id.nav_all_questions:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AllQuestionFragment()).commit();
                 break;
             case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();

@@ -8,7 +8,7 @@ public class Attempt {
     @SerializedName("id")
     private long ID ;
     @SerializedName(("isSubmitted"))
-    private boolean IsSubmitted;
+    private Integer IsSubmitted;
     @SerializedName("totalQuestions")
     private Integer TotalQuestions ;
     @SerializedName("totalCorrectAnswer")
@@ -18,16 +18,16 @@ public class Attempt {
     @SerializedName("finishedAT")
     private String FinishedAT;
     @SerializedName("appUserId")
-    private String AppUserId;
+    private long AppUserId;
 
-    public Attempt(long ID, boolean isSubmitted, Integer totalQuestions, Integer totalCorrectAnswer, String startedAt, String finishedAT, String appUserId) {
+    public Attempt(long ID, Integer isSubmitted, Integer totalQuestions, Integer totalCorrectAnswer, String startedAt, String finishedAT, long appUserId) {
         this.ID = ID;
-        IsSubmitted = isSubmitted;
-        TotalQuestions = totalQuestions;
-        TotalCorrectAnswer = totalCorrectAnswer;
-        StartedAt = startedAt;
-        FinishedAT = finishedAT;
-        AppUserId = appUserId;
+        this.IsSubmitted = isSubmitted;
+        this.TotalQuestions = totalQuestions;
+        this.TotalCorrectAnswer = totalCorrectAnswer;
+        this.StartedAt = startedAt;
+        this.FinishedAT = finishedAT;
+        this.AppUserId = appUserId;
     }
 
     public long getID() {
@@ -38,11 +38,11 @@ public class Attempt {
         this.ID = ID;
     }
 
-    public boolean isSubmitted() {
+    public Integer isSubmitted() {
         return IsSubmitted;
     }
 
-    public void setSubmitted(boolean submitted) {
+    public void setSubmitted(Integer submitted) {
         IsSubmitted = submitted;
     }
 
@@ -78,11 +78,11 @@ public class Attempt {
         FinishedAT = finishedAT;
     }
 
-    public String getAppUserId() {
+    public Long getAppUserId() {
         return AppUserId;
     }
 
-    public void setAppUserId(String appUserId) {
+    public void setAppUserId(long appUserId) {
         AppUserId = appUserId;
     }
 }

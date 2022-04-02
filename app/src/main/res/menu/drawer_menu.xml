@@ -18,7 +18,10 @@
             android:id="@+id/nav_previous_attempt"
             android:icon="@drawable/ic_previous_attempt"
             android:title="Previous Attempts" />
-
+        <item
+            android:id="@+id/nav_all_questions"
+            android:icon="@drawable/ic_previous_attempt"
+            android:title="All questions" />
 
 
 
