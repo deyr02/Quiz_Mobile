@@ -1,7 +1,6 @@
 package com.example.cars;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 
 public class AllQuestionFragment extends Fragment {
     private  View rootView;
-    private QuizAdapter quizAdapter;
+    private QuizPractiseAdapter quizAdapter;
     RecyclerView recyclerView_all_question;
     @Nullable
     @Override
@@ -29,7 +28,7 @@ public class AllQuestionFragment extends Fragment {
         QuizService quizService = new QuizService(rootView.getContext());
 
         ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-        quizAdapter = new QuizAdapter(rootView.getContext(), quizzes);
+        quizAdapter = new QuizPractiseAdapter(rootView.getContext(), quizzes);
         recyclerView_all_question.setAdapter(quizAdapter);
         recyclerView_all_question.setLayoutManager(new LinearLayoutManager((rootView.getContext())));
 
@@ -42,7 +41,7 @@ public class AllQuestionFragment extends Fragment {
 
             @Override
             public void onResponse(ArrayList<Quiz> response) {
-                quizAdapter = new QuizAdapter(rootView.getContext(), response);
+                quizAdapter = new QuizPractiseAdapter(rootView.getContext(), response);
                 recyclerView_all_question.setAdapter(quizAdapter);
             }
         });

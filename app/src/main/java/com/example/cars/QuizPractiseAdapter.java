@@ -1,6 +1,9 @@
 package com.example.cars;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +22,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class QuizAdapter extends  RecyclerView.Adapter<QuizAdapter.MyViewHolder>  {
+
+
+public class QuizPractiseAdapter extends  RecyclerView.Adapter<QuizPractiseAdapter.MyViewHolder>  {
 
     private  Context context;
     private  ArrayList<Quiz> quizzes;
 
-    public  QuizAdapter(Context context, ArrayList<Quiz> quizzes){
+    public QuizPractiseAdapter(Context context, ArrayList<Quiz> quizzes){
         this.context = context;
         this.quizzes = quizzes;
     }
@@ -34,16 +39,48 @@ public class QuizAdapter extends  RecyclerView.Adapter<QuizAdapter.MyViewHolder>
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.quiz_row, parent, false);
-        return new QuizAdapter.MyViewHolder(view);
+        View view = inflater.inflate(R.layout.quiz_review_row, parent, false);
+        return new QuizPractiseAdapter.MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         initializeComponents(holder, holder.getAdapterPosition());
+
+
+
+
+
     }
 
-    private void initializeComponents(MyViewHolder holder, int adapterPosition) {
+    private void initializeComponents(MyViewHolder holder, int adapterPosition ) {
+
+        //Control Array
+        ArrayList<ConstraintLayout> radio_blocks = new ArrayList<ConstraintLayout>();
+        radio_blocks.add(holder.radio_block_A);
+        radio_blocks.add(holder.radio_block_B);
+        radio_blocks.add(holder.radio_block_C);
+        radio_blocks.add(holder.radio_block_D);
+
+        ArrayList<RadioButton> radioButtons = new ArrayList<RadioButton>();
+        radioButtons.add(holder.radio_option_A);
+        radioButtons.add(holder.radio_option_B);
+        radioButtons.add(holder.radio_option_C);
+        radioButtons.add(holder.radio_option_D);
+
+        ArrayList<ConstraintLayout> checkbox_blocks = new ArrayList<ConstraintLayout>();
+        checkbox_blocks.add(holder.checkbox_block_A);
+        checkbox_blocks.add(holder.checkbox_block_B);
+        checkbox_blocks.add(holder.checkbox_block_C);
+        checkbox_blocks.add(holder.checkbox_block_D);
+
+        ArrayList<CheckBox> checkBoxes = new ArrayList<CheckBox>();
+        checkBoxes.add(holder.checkBox_A);
+        checkBoxes.add(holder.checkBox_B);
+        checkBoxes.add(holder.checkBox_C);
+        checkBoxes.add(holder.checkBox_D);
+
+
         //question
         holder.txt_question_number.setText("Question :" + (adapterPosition +1));
         holder.txt_question.setText(quizzes.get(adapterPosition).getQuestion());
@@ -64,6 +101,11 @@ public class QuizAdapter extends  RecyclerView.Adapter<QuizAdapter.MyViewHolder>
             holder.txt_option_B.setText(options.get(1).getDescription());
             holder.txt_option_C.setText(options.get(2).getDescription());
             holder.txt_option_D.setText(options.get(3).getDescription());
+            holder.radio_option_A.setEnabled(false);
+            holder.radio_option_B.setEnabled(false);
+            holder.radio_option_C.setEnabled(false);
+            holder.radio_option_D.setEnabled(false);
+
 
         }
         else {
@@ -72,12 +114,98 @@ public class QuizAdapter extends  RecyclerView.Adapter<QuizAdapter.MyViewHolder>
             holder.checkBox_B_Text.setText(options.get(1).getDescription());
             holder.checkBox_C_Text.setText(options.get(2).getDescription());
             holder.checkBox_D_Text.setText(options.get(3).getDescription());
+            holder.checkBox_A.setEnabled(false);
+            holder.checkBox_B.setEnabled(false);
+            holder.checkBox_C.setEnabled(false);
+            holder.checkBox_D.setEnabled(false);
         }
 
-        holder.txt_answer.setText(quizzes.get(adapterPosition).getAnswers());
+        ArrayList<String> RightAnswer = getRightAnswers(quizzes.get(adapterPosition).getAnswers(), quizzes.get(adapterPosition).getQuizOptions());
+
+        holder.txt_answer.setText("Correct Answer: " + TextUtils.join(",", RightAnswer));
+        AnimateAnswer(RightAnswer, radio_blocks, radioButtons, checkbox_blocks, checkBoxes);
 
 
     }
+
+
+    private ArrayList<String> getRightAnswers (String Answer, ArrayList<QuizOption> options){
+        ArrayList<String> output = new ArrayList<String>();
+
+        try{
+
+            //possible answers
+            ArrayList<String> possibleAnswerOptions = new ArrayList<String>();
+            possibleAnswerOptions.add("A");
+            possibleAnswerOptions.add("B");
+            possibleAnswerOptions.add("C");
+            possibleAnswerOptions.add("D");
+
+
+            String[] AnswerString = Answer.split(",");
+
+
+            ArrayList<QuizOption> list= CloneArrayList(options);
+            for(int i =0; i< AnswerString.length; i++){
+                for(int j = 0; j< list.size(); j++){
+                    Log.e("ansers", AnswerString[i]+" " +list.get(j).getId().toString());
+
+                    if(Integer.parseInt(AnswerString[i].trim()) == list.get(j).getId()){
+                        output.add( possibleAnswerOptions.get(j));
+                        possibleAnswerOptions.remove(j);
+                        list.remove(j);
+                    }
+                }
+            }
+            return output;
+        }
+        catch (Exception e){
+            return  output;
+        }
+    }
+
+
+    @SuppressLint("ResourceAsColor")
+    private  void  AnimateAnswer(ArrayList<String> answers, ArrayList<ConstraintLayout> radioButtonBlock, ArrayList<RadioButton> radioButtons, ArrayList<ConstraintLayout> checkboxBlock, ArrayList<CheckBox> checkBoxes){
+
+        ArrayList<String> possibleAnswerOptions = new ArrayList<String>();
+        possibleAnswerOptions.add("A");
+        possibleAnswerOptions.add("B");
+        possibleAnswerOptions.add("C");
+        possibleAnswerOptions.add("D");
+
+        if(answers.size() == 1){
+
+            for(int i =0; i<possibleAnswerOptions.size(); i++){
+                if(answers.get(0) == possibleAnswerOptions.get(i) ){
+                    radioButtons.get(i).toggle();
+                    radioButtonBlock.get(i).setBackgroundColor(R.color.green);
+                }
+            }
+
+        }
+        else {
+            for(int i =0; i< answers.size(); i++){
+                for(int j =0; j<possibleAnswerOptions.size(); j++){
+                    if(answers.get(i) == possibleAnswerOptions.get(j)){
+                        checkboxBlock.get(j).setBackgroundColor(R.color.green);
+                        checkBoxes.get(j).setChecked(true);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    private  ArrayList<QuizOption> CloneArrayList(ArrayList<QuizOption> list){
+        ArrayList<QuizOption> output =new ArrayList<QuizOption>();
+        for(QuizOption item: list){
+            output.add(item);
+        }
+        return output;
+    }
+
 
     @Override
     public int getItemCount() {
