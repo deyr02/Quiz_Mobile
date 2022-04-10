@@ -21,7 +21,7 @@ public class QuizService {
     public QuizService(Context context){
         this.context = context;
     }
-
+ /*
     public void  read(APIResponseListener apiResponseListener){
         String URL = API.QUIZ+"read.php";
         JsonArrayRequest
@@ -49,4 +49,6 @@ public class QuizService {
                 });
         MySingleton.getInstances(context).addToRequestQueue(jsonArrayRequest);
     }
+
+  */
 }

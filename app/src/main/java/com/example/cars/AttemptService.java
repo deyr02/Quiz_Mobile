@@ -18,12 +18,12 @@ import java.util.List;
 public class AttemptService {
 
     private Context context;
-    private long userId;
-    public AttemptService(Context context, Long userId) {
+    private Integer userId;
+    public AttemptService(Context context, Integer userId) {
         this.context = context;
         this.userId = userId;
     }
-
+/*
     public void  GetAttmpts(APIResponseListener apiResponseListener){
         String URL = API.ATTEMPT+"readbyuser.php?userid=" +userId;
         JsonArrayRequest
@@ -51,4 +51,6 @@ public class AttemptService {
                 });
         MySingleton.getInstances(context).addToRequestQueue(jsonArrayRequest);
     }
+
+ */
 }

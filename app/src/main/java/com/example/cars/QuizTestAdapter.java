@@ -13,27 +13,30 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.VolleyError;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 
-
-public class QuizPractiseAdapter extends  RecyclerView.Adapter<QuizPractiseAdapter.MyViewHolder>  {
+public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyViewHolder>  {
 
     private  Context context;
-    private  ArrayList<Quiz> quizzes;
+    private  ArrayList<AttemptLine> attemptLines;
     private API api;
 
-    public QuizPractiseAdapter(Context context, ArrayList<Quiz> quizzes){
+    public QuizTestAdapter(Context context, ArrayList<AttemptLine> attemptLines){
         this.context = context;
-        this.quizzes = quizzes;
-        api = new API (this.context);
+        this.attemptLines = attemptLines;
+
     }
 
 
@@ -42,7 +45,7 @@ public class QuizPractiseAdapter extends  RecyclerView.Adapter<QuizPractiseAdapt
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.quiz_practise_row, parent, false);
-        return new QuizPractiseAdapter.MyViewHolder(view);
+        return new QuizTestAdapter.MyViewHolder(view);
     }
 
     @Override
@@ -82,54 +85,180 @@ public class QuizPractiseAdapter extends  RecyclerView.Adapter<QuizPractiseAdapt
         checkBoxes.add(holder.checkBox_C);
         checkBoxes.add(holder.checkBox_D);
 
+        if(attemptLines.size() > 0){
+            Quiz quizzes = attemptLines.get(adapterPosition).getQuiz();
+            api = new API(context);
 
-        //question
-        holder.txt_question_number.setText("Question :" + (adapterPosition +1));
-        holder.txt_question.setText(quizzes.get(adapterPosition).getQuestion());
-        //image here
 
-        if(quizzes.get(adapterPosition).getContainsImage() == 1){
-            String ImgUrl = api.getImageURL()+ quizzes.get(adapterPosition).getImageUrl();
-            Picasso.with(context).load(ImgUrl).into(holder.imageView_question_image);
-            holder.imageView_question_image.setVisibility(View.VISIBLE);
+            //question
+            holder.txt_question_number.setText("Question :" + (adapterPosition +1));
+            holder.txt_question.setText(attemptLines.get(adapterPosition).getQuiz().getQuestion());
+            //image here
+
+            if(quizzes.getContainsImage() == 1){
+                String ImgUrl = api.getImageURL()+ quizzes.getImageUrl();
+                Picasso.with(context).load(ImgUrl).into(holder.imageView_question_image);
+                holder.imageView_question_image.setVisibility(View.VISIBLE);
+            }
+
+
+            ArrayList<QuizOption> options = quizzes.getQuizOptions();
+            if(quizzes.getIsAnswerMultiple()== 0){
+                holder.radio_button_group.setVisibility(View.VISIBLE);
+
+                holder.txt_option_A.setText(options.get(0).getDescription());
+                holder.txt_option_B.setText(options.get(1).getDescription());
+                holder.txt_option_C.setText(options.get(2).getDescription());
+                holder.txt_option_D.setText(options.get(3).getDescription());
+
+                holder.radio_option_A.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        toggleRadioButton(radioButtons);
+                        holder.radio_option_A.setChecked(true);
+                       int optionId = attemptLines.get(adapterPosition).getQuiz().getQuizOptions().get(0).getId();
+                       attemptLines.get(adapterPosition).setUserSelection(optionId+"");
+                        attemptLines.get(adapterPosition).setIsAnswered(1);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+
+                    }
+                });
+
+                holder.radio_option_B.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        toggleRadioButton(radioButtons);
+                        holder.radio_option_B.setChecked(true);
+                        int optionId = attemptLines.get(adapterPosition).getQuiz().getQuizOptions().get(1).getId();
+                        attemptLines.get(adapterPosition).setUserSelection(optionId+"");
+                        attemptLines.get(adapterPosition).setIsAnswered(1);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+
+                    }
+                });
+                holder.radio_option_C.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        toggleRadioButton(radioButtons);
+                        holder.radio_option_C.setChecked(true);
+                        int optionId = attemptLines.get(adapterPosition).getQuiz().getQuizOptions().get(2).getId();
+                        attemptLines.get(adapterPosition).setUserSelection(optionId+"");
+                        attemptLines.get(adapterPosition).setIsAnswered(1);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+
+                    }
+                });
+                holder.radio_option_D.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        toggleRadioButton(radioButtons);
+                        holder.radio_option_D.setChecked(true);
+                        int optionId = attemptLines.get(adapterPosition).getQuiz().getQuizOptions().get(3).getId();
+                        attemptLines.get(adapterPosition).setUserSelection(optionId+"");
+                        attemptLines.get(adapterPosition).setIsAnswered(1);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+
+                    }
+                });
+
+
+            }
+            else {
+                holder.checkBox_group.setVisibility(View.VISIBLE);
+                holder.checkBox_A_Text.setText(options.get(0).getDescription());
+                holder.checkBox_B_Text.setText(options.get(1).getDescription());
+                holder.checkBox_C_Text.setText(options.get(2).getDescription());
+                holder.checkBox_D_Text.setText(options.get(3).getDescription());
+
+                holder.checkBox_A.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String answer = gettingSelectedCheckBox(checkBoxes, attemptLines.get(adapterPosition).getQuiz().getQuizOptions()) ;
+                        if(answer== ""){
+                            attemptLines.get(adapterPosition).setIsAnswered(0);
+                        }
+                        else {
+                            attemptLines.get(adapterPosition).setIsAnswered(1);
+                        }
+                        attemptLines.get(adapterPosition).setUserSelection(answer);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+
+                    }
+                }); holder.checkBox_B.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String answer = gettingSelectedCheckBox(checkBoxes, attemptLines.get(adapterPosition).getQuiz().getQuizOptions()) ;
+                        if(answer== ""){
+                            attemptLines.get(adapterPosition).setIsAnswered(0);
+                        }
+                        else {
+                            attemptLines.get(adapterPosition).setIsAnswered(1);
+                        }
+                        attemptLines.get(adapterPosition).setUserSelection(answer);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+                    }
+                }); holder.checkBox_C.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String answer = gettingSelectedCheckBox(checkBoxes, attemptLines.get(adapterPosition).getQuiz().getQuizOptions()) ;
+                        if(answer== ""){
+                            attemptLines.get(adapterPosition).setIsAnswered(0);
+                        }
+                        else {
+                            attemptLines.get(adapterPosition).setIsAnswered(1);
+                        }
+                        attemptLines.get(adapterPosition).setUserSelection(answer);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+                    }
+                }); holder.checkBox_D.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String answer = gettingSelectedCheckBox(checkBoxes, attemptLines.get(adapterPosition).getQuiz().getQuizOptions()) ;
+                        if(answer== ""){
+                            attemptLines.get(adapterPosition).setIsAnswered(0);
+                        }
+                        else {
+                            attemptLines.get(adapterPosition).setIsAnswered(1);
+                        }
+                        attemptLines.get(adapterPosition).setUserSelection(answer);
+                        api.updateAttemptLine(attemptLines.get(adapterPosition));
+                    }
+                });
+
+            }
+
+            // ArrayList<String> RightAnswer = getRightAnswers(quizzes.get(adapterPosition).getAnswers(), quizzes.get(adapterPosition).getQuizOptions());
+
+            //  holder.txt_answer.setText("Correct Answer: " + TextUtils.join(",", RightAnswer));
+            // AnimateAnswer(RightAnswer, radio_blocks, radioButtons, checkbox_blocks, checkBoxes);
         }
 
 
-        ArrayList<QuizOption> options = quizzes.get(adapterPosition).getQuizOptions();
-        if(quizzes.get(adapterPosition).getIsAnswerMultiple()== 0){
-            holder.radio_button_group.setVisibility(View.VISIBLE);
-
-            holder.txt_option_A.setText(options.get(0).getDescription());
-            holder.txt_option_B.setText(options.get(1).getDescription());
-            holder.txt_option_C.setText(options.get(2).getDescription());
-            holder.txt_option_D.setText(options.get(3).getDescription());
-            holder.radio_option_A.setEnabled(false);
-            holder.radio_option_B.setEnabled(false);
-            holder.radio_option_C.setEnabled(false);
-            holder.radio_option_D.setEnabled(false);
-
-
-        }
-        else {
-            holder.checkBox_group.setVisibility(View.VISIBLE);
-            holder.checkBox_A_Text.setText(options.get(0).getDescription());
-            holder.checkBox_B_Text.setText(options.get(1).getDescription());
-            holder.checkBox_C_Text.setText(options.get(2).getDescription());
-            holder.checkBox_D_Text.setText(options.get(3).getDescription());
-            holder.checkBox_A.setEnabled(false);
-            holder.checkBox_B.setEnabled(false);
-            holder.checkBox_C.setEnabled(false);
-            holder.checkBox_D.setEnabled(false);
-        }
-
-        ArrayList<String> RightAnswer = getRightAnswers(quizzes.get(adapterPosition).getAnswers(), quizzes.get(adapterPosition).getQuizOptions());
-
-        holder.txt_answer.setText("Correct Answer: " + TextUtils.join(",", RightAnswer));
-        AnimateAnswer(RightAnswer, radio_blocks, radioButtons, checkbox_blocks, checkBoxes);
 
 
     }
 
+    private  void  toggleRadioButton(ArrayList<RadioButton> buttons){
+        for (RadioButton button: buttons) {
+            button.setChecked(false);
+        }
+    }
+
+    private String gettingSelectedCheckBox(ArrayList<CheckBox> boxes, ArrayList<QuizOption> options){
+        ArrayList<Integer> answers = new ArrayList<Integer>();
+        for(Integer i =0; i< boxes.size(); i++){
+            if(boxes.get(i).isChecked()){
+                answers.add(options.get(i).getId());
+            }
+        }
+        if (answers.size() ==0){
+            return "";
+        }
+        else {
+            Collections.sort(answers);
+            return  TextUtils.join("," , answers);
+        }
+    }
 
     private ArrayList<String> getRightAnswers (String Answer, ArrayList<QuizOption> options){
         ArrayList<String> output = new ArrayList<String>();
@@ -209,7 +338,7 @@ public class QuizPractiseAdapter extends  RecyclerView.Adapter<QuizPractiseAdapt
 
     @Override
     public int getItemCount() {
-        return quizzes.size();
+        return attemptLines.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -336,6 +465,7 @@ public class QuizPractiseAdapter extends  RecyclerView.Adapter<QuizPractiseAdapt
             ////////////////////////////////////////////////////////////////
             ///Answer block.
             quiz_answer_box = itemView.findViewById(R.id.quiz_answer_box);
+            quiz_answer_box.setVisibility(View.GONE);
             imageView_answer_icon = itemView.findViewById(R.id.img_view_quiz_status_icon);
             txt_answer = itemView.findViewById(R.id.txt_answer);
 

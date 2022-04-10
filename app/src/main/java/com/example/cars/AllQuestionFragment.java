@@ -25,7 +25,7 @@ public class AllQuestionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_all_question, container, false);
         recyclerView_all_question = rootView.findViewById(R.id.recycler_view_all_questions);
-        QuizService quizService = new QuizService(rootView.getContext());
+        API api = new API(rootView.getContext());
 
         ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
         quizAdapter = new QuizPractiseAdapter(rootView.getContext(), quizzes);
@@ -33,7 +33,7 @@ public class AllQuestionFragment extends Fragment {
         recyclerView_all_question.setLayoutManager(new LinearLayoutManager((rootView.getContext())));
 
 
-        quizService.read(new APIResponseListener<ArrayList<Quiz>>() {
+        api.readAllQuestions(new APIResponseListener<ArrayList<Quiz>>() {
             @Override
             public void onError(VolleyError error) {
                 Toast.makeText(rootView.getContext(), error.toString(), Toast.LENGTH_SHORT).show();;

@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new AllQuestionFragment()).commit();
-        navigationView.setCheckedItem(R.id.nav_all_questions);
+                new StartQuizFragment()).commit();
+        navigationView.setCheckedItem(R.id.nav_start_quiz);
     }
 
 
