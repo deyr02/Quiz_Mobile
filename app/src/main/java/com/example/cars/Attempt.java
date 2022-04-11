@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Attempt {
     @SerializedName("id")
-    private long ID ;
+    private Integer ID ;
     @SerializedName(("isSubmitted"))
     private Integer IsSubmitted;
     @SerializedName("totalQuestions")
@@ -15,35 +15,35 @@ public class Attempt {
     private Integer TotalCorrectAnswer;
     @SerializedName("startedAt")
     private String StartedAt;
-    @SerializedName("finishedAT")
+    @SerializedName("finishedAt")
     private String FinishedAT;
-    @SerializedName("appUserId")
-    private long AppUserId;
+    @SerializedName("userId")
+    private Integer UserId;
 
-    public Attempt(long ID, Integer isSubmitted, Integer totalQuestions, Integer totalCorrectAnswer, String startedAt, String finishedAT, long appUserId) {
+    public Attempt(Integer ID, Integer isSubmitted, Integer totalQuestions, Integer totalCorrectAnswer, String startedAt, String finishedAT, Integer userId) {
         this.ID = ID;
         this.IsSubmitted = isSubmitted;
         this.TotalQuestions = totalQuestions;
         this.TotalCorrectAnswer = totalCorrectAnswer;
         this.StartedAt = startedAt;
         this.FinishedAT = finishedAT;
-        this.AppUserId = appUserId;
+        this.UserId = userId;
     }
 
-    public long getID() {
+    public Integer getID() {
         return ID;
     }
 
-    public void setID(long ID) {
+    public void setID(Integer ID) {
         this.ID = ID;
     }
 
-    public Integer isSubmitted() {
+    public Integer getIsSubmitted() {
         return IsSubmitted;
     }
 
-    public void setSubmitted(Integer submitted) {
-        IsSubmitted = submitted;
+    public void setIsSubmitted(Integer isSubmitted) {
+        IsSubmitted = isSubmitted;
     }
 
     public Integer getTotalQuestions() {
@@ -78,11 +78,11 @@ public class Attempt {
         FinishedAT = finishedAT;
     }
 
-    public Long getAppUserId() {
-        return AppUserId;
+    public Integer getUserId() {
+        return UserId;
     }
 
-    public void setAppUserId(long appUserId) {
-        AppUserId = appUserId;
+    public void setUserId(Integer userId) {
+        UserId = userId;
     }
 }

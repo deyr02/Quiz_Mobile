@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="QuestionHeader">#006778</color>
     <color name="green">#019267</color>
+    <color name="yellow">#FFD93D</color>
+    <color name="red">#FF0000</color>
 </resources>

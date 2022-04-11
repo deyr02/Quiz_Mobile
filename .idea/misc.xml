@@ -5,14 +5,18 @@
       <map>
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/drawable/ic_correct_answer.xml" value="0.536" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/drawable/ic_previous_attempt.xml" value="0.407" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/activity_register_success.xml" value="0.3885416666666667" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/attempt_row.xml" value="0.5" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_all_question.xml" value="0.33" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_previous_attempt.xml" value="0.20845997973657548" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_quiz.xml" value="0.4329710144927536" />
-        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_start_quiz.xml" value="0.2698072805139186" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/fragment_start_quiz.xml" value="0.567651632970451" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/nav_header.xml" value="0.4329710144927536" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/quiz_practise_row.xml" value="0.3885416666666667" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/quiz_review_row.xml" value="0.4328125" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/layout/quiz_row.xml" value="0.5" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/CARS/app/src/main/res/menu/drawer_menu.xml" value="0.33" />

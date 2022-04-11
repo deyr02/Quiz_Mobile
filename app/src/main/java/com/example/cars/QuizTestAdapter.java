@@ -2,6 +2,7 @@ package com.example.cars;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.telecom.Call;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,11 +33,12 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
     private  Context context;
     private  ArrayList<AttemptLine> attemptLines;
     private API api;
+    private Attempt attempt;
 
-    public QuizTestAdapter(Context context, ArrayList<AttemptLine> attemptLines){
+    public QuizTestAdapter(Context context, ArrayList<AttemptLine> attemptLines, Attempt attempt){
         this.context = context;
         this.attemptLines = attemptLines;
-
+        this.attempt = attempt;
     }
 
 
@@ -59,6 +61,7 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
     }
 
     private void initializeComponents(MyViewHolder holder, int adapterPosition ) {
+
 
         //Control Array
         ArrayList<ConstraintLayout> radio_blocks = new ArrayList<ConstraintLayout>();
@@ -110,6 +113,12 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
                 holder.txt_option_B.setText(options.get(1).getDescription());
                 holder.txt_option_C.setText(options.get(2).getDescription());
                 holder.txt_option_D.setText(options.get(3).getDescription());
+                if(attempt.getIsSubmitted() ==1){
+                    holder.radio_option_A.setEnabled(false);
+                    holder.radio_option_B.setEnabled(false);
+                    holder.radio_option_C.setEnabled(false);
+                    holder.radio_option_D.setEnabled(false);
+                }
 
                 holder.radio_option_A.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -169,6 +178,12 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
                 holder.checkBox_B_Text.setText(options.get(1).getDescription());
                 holder.checkBox_C_Text.setText(options.get(2).getDescription());
                 holder.checkBox_D_Text.setText(options.get(3).getDescription());
+                if(attempt.getIsSubmitted() ==1){
+                   holder.checkBox_A.setEnabled(false);
+                   holder.checkBox_B.setEnabled(false);
+                   holder.checkBox_C.setEnabled(false);
+                   holder.checkBox_D.setEnabled(false);
+                }
 
                 holder.checkBox_A.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -226,11 +241,23 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
                 });
 
             }
+            if(attempt.getIsSubmitted() == 1){
+                holder.quiz_answer_box.setVisibility(View.VISIBLE);
+                 ArrayList<String> RightAnswer = getRightAnswers(attemptLines.get(adapterPosition).getQuiz().getAnswers(), attemptLines.get(adapterPosition).getQuiz().getQuizOptions());
+                 holder.txt_answer.setText("Correct Answer: " + TextUtils.join(",", RightAnswer));
 
-            // ArrayList<String> RightAnswer = getRightAnswers(quizzes.get(adapterPosition).getAnswers(), quizzes.get(adapterPosition).getQuizOptions());
+                ArrayList<String> UserAnswer = getRightAnswers(attemptLines.get(adapterPosition).getUserSelection(), attemptLines.get(adapterPosition).getQuiz().getQuizOptions());
+                 AnimateAnswer(UserAnswer, radio_blocks, radioButtons, checkbox_blocks, checkBoxes);
+                holder.imageView_answer_icon.setVisibility(View.VISIBLE);
 
-            //  holder.txt_answer.setText("Correct Answer: " + TextUtils.join(",", RightAnswer));
-            // AnimateAnswer(RightAnswer, radio_blocks, radioButtons, checkbox_blocks, checkBoxes);
+                if(attemptLines.get(adapterPosition).getUserSelection().equals(attemptLines.get(adapterPosition).getQuiz().getAnswers())){
+                    holder.imageView_answer_icon.setImageResource(R.drawable.ic_correct_answer);
+                }
+                else {
+                    holder.imageView_answer_icon.setImageResource(R.drawable.ic_wrong_answer);
+                }
+            }
+
         }
 
 
@@ -308,7 +335,6 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
             for(int i =0; i<possibleAnswerOptions.size(); i++){
                 if(answers.get(0) == possibleAnswerOptions.get(i) ){
                     radioButtons.get(i).toggle();
-                    radioButtonBlock.get(i).setBackgroundColor(R.color.green);
                 }
             }
 
@@ -317,7 +343,6 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
             for(int i =0; i< answers.size(); i++){
                 for(int j =0; j<possibleAnswerOptions.size(); j++){
                     if(answers.get(i) == possibleAnswerOptions.get(j)){
-                        checkboxBlock.get(j).setBackgroundColor(R.color.green);
                         checkBoxes.get(j).setChecked(true);
                     }
                 }
@@ -342,6 +367,11 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+
+
+
+
+        ////
         TextView txt_question_number;
         TextView txt_question;
         ImageView imageView_question_image;
@@ -406,6 +436,10 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+
+
+            /////////////////////////////////////////////////////////////////////
              txt_question_number = itemView.findViewById(R.id.txt_question_number);
              txt_question = itemView.findViewById(R.id.txt_question);
              imageView_question_image = itemView.findViewById(R.id.imageView_question_image);
@@ -466,7 +500,7 @@ public class QuizTestAdapter extends  RecyclerView.Adapter<QuizTestAdapter.MyVie
             ///Answer block.
             quiz_answer_box = itemView.findViewById(R.id.quiz_answer_box);
             quiz_answer_box.setVisibility(View.GONE);
-            imageView_answer_icon = itemView.findViewById(R.id.img_view_quiz_status_icon);
+            imageView_answer_icon = itemView.findViewById(R.id.imageview_answer_icon);
             txt_answer = itemView.findViewById(R.id.txt_answer);
 
         }

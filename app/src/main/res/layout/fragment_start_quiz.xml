@@ -17,17 +17,125 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/starting_block"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:background="@color/green"
+                android:layout_margin="2sp"
+                android:padding="5sp">
 
                 <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
+                    android:id="@+id/lbl_startedAt"
+                    android:layout_width="98dp"
+                    android:layout_height="28dp"
+                    android:padding="5sp"
+                    android:text="Started At:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_date"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
-            </LinearLayout>
+                    android:layout_marginStart="12dp"
+
+                    android:padding="7sp"
+                    android:text="txt_date"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_startedAt"
+                    app:layout_constraintTop_toTopOf="@+id/lbl_startedAt" />
+
+                <TextView
+                    android:id="@+id/txt_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="12dp"
+                    android:padding="7sp"
+                    android:text="txt_time"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/txt_date"
+                    app:layout_constraintTop_toTopOf="@+id/lbl_startedAt" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/score_block"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/green"
+                android:layout_margin="2sp"
+                android:padding="5sp">
+
+                <TextView
+                    android:id="@+id/txt_quiz_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="12dp"
+                    android:padding="7sp"
+                    android:text="Not Completed"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/txt_score2"
+                    app:layout_constraintTop_toTopOf="@+id/txt_score2" />
+
+                <TextView
+                    android:id="@+id/txt_score2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+
+                    android:padding="5sp"
+                    android:text="Status :"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_Score"
+                    app:layout_constraintTop_toTopOf="@+id/lbl_Score" />
+
+                <TextView
+                    android:id="@+id/lbl_Score"
+                    android:layout_width="159dp"
+                    android:layout_height="28dp"
+                    android:padding="5sp"
+                    android:text="Score:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+
+                    android:padding="7sp"
+                    android:text="100"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_Score"
+                    app:layout_constraintTop_toTopOf="@+id/lbl_Score" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_test_quiz"
@@ -40,6 +148,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
                 <Button
